@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-function Layout(){
+function AuthLayout(){
     return(
         <div className="min-h-screen w-full flex ">
            <div className="hidden lg:flex items-center justify-center bg-black w-1/2 px-12">
@@ -14,5 +14,5 @@ function Layout(){
     )
 }
 
-export default Layout;
+export default AuthLayout;
 
