@@ -1,12 +1,19 @@
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 import bcrypt from 'bcryptjs'
+
 export const signup = async (req, res) => {
+
+  if (!req.body) {
+    return res.status(400).json({ message: "Request body is missing!" });
+  }
+
   const { name, email, password } = req.body;
+
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
-      return res.status(400).json({ message: "Email is already exist" });
+      return res.status(400).json({ message: "Email already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newuser = await User.create({
@@ -20,6 +27,7 @@ export const signup = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 export const Login = async (req, res) => {
   const { email, password } = req.body;
